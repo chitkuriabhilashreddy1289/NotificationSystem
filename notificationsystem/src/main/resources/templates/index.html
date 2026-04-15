@@ -1,16 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Send OTP</title>
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 </head>
-<body>
 
-<h2>Send OTP</h2>
+<body class="bg-light">
 
-<form action="/auth/send-otp" method="post">
-    <input type="email" name="email" placeholder="Enter Email" required />
-    <button type="submit">Send OTP</button>
-</form>
+<div class="container mt-5">
+    <div class="card p-4 shadow">
+
+        <h3 class="text-center">OTP Verification</h3>
+
+        <!-- Success / Error Message -->
+        <div th:if="${message}" class="alert alert-info text-center">
+            <span th:text="${message}"></span>
+        </div>
+
+        <!-- SEND OTP FORM -->
+        <form th:action="@{/auth/send-otp-ui}" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+                Send OTP
+            </button>
+        </form>
+
+        <hr>
+
+        <!-- VERIFY OTP FORM -->
+        <form th:action="@{/auth/verify-otp-ui}" method="post">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+            </div>
+
+            <div class="form-group">
+                <label>OTP</label>
+                <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-block">
+                Verify OTP
+            </button>
+        </form>
+
+    </div>
+</div>
 
 </body>
 </html>

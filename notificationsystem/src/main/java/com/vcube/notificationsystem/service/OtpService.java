@@ -1,4 +1,4 @@
-package com.vcube.notificationsystem.service;
+ package com.vcube.notificationsystem.service;
 
 import java.time.LocalDateTime;
 
@@ -47,12 +47,10 @@ public class OtpService {
         Otp otp = otpRepo.findByUserAndOtp(user, otpValue)
                 .orElseThrow(() -> new RuntimeException("Invalid OTP"));
 
-        // ⏰ Check expiry
         if (otp.getExpiryTime().isBefore(LocalDateTime.now())) {
             throw new RuntimeException("OTP expired");
         }
 
-        // 🧹 Optional: delete OTP after success
         otpRepo.delete(otp);
 
         return true;
