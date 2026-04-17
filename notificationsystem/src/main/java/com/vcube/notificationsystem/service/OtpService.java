@@ -47,9 +47,7 @@ public class OtpService {
         Otp otp = otpRepo.findByUserAndOtp(user, otpValue)
                 .orElseThrow(() -> new RuntimeException("Invalid OTP"));
 
-        if (otp.getExpiryTime().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("OTP expired");
-        }
+         
 
         otpRepo.delete(otp);
 

@@ -31,7 +31,7 @@ public class AuthController {
     @PostMapping("/send-otp-ui")
     public String sendOtp(@RequestParam String email, Model model) {
 
-        String otp = otpService.generateOtp(email);
+		String otp = otpService.generateOtp(email);
 
         emailService.sendEmail(email, "OTP Verification", "Your OTP is: " + otp);
 
